@@ -31,7 +31,10 @@ class TelemetryInsights implements ProvidesTelemetryInsights
 
     public function lunarVersion(): string
     {
-        return InstalledVersions::getPrettyVersion('lunarphp/core') ?? 'dev';
+        // Check for ygs/lunar-core first (our fork), then fallback to lunarphp/core
+        return InstalledVersions::getPrettyVersion('ygs/lunar-core') 
+            ?? InstalledVersions::getPrettyVersion('lunarphp/core') 
+            ?? 'dev';
     }
 
     public function dbDriver(): string
